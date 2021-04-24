@@ -35,4 +35,8 @@ class AppColors {
   static final Color levelButtonTextMedio = darkGreen;
   static final Color levelButtonTextDificil = Color(0xFFE8891C);
   static final Color levelButtonTextPerito = darkRed;
+
+  //Overlay
+  static final Color overlayGrey = Color(0xFFA6A1B2).withOpacity(0.3);
+  static final Color overlayWhite = Color(0xFFFFFFFF).withOpacity(0.3);
 }
