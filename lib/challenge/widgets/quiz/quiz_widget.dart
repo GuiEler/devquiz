@@ -1,6 +1,5 @@
 import 'package:devquiz/challenge/widgets/answer/answer_widget.dart';
 import 'package:devquiz/core/core.dart';
-import 'package:devquiz/shared/models/answer_model.dart';
 import 'package:devquiz/shared/models/question_model.dart';
 import 'package:flutter/material.dart';
 
