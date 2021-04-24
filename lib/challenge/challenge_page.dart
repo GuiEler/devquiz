@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:devquiz/challenge/challenge_controller.dart';
 import 'package:devquiz/challenge/widgets/question_indicator/question_indicator.dart';
 import 'package:devquiz/challenge/widgets/quiz/quiz_widget.dart';
@@ -33,7 +32,6 @@ class _ChallengePageState extends State<ChallengePage> {
       print(controller.currentPageNotifier);
     });
     super.initState();
-    
   }
 
   void nextPage() {
