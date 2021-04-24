@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:devquiz/core/core.dart';
 import 'package:devquiz/shared/widgets/next_button/next_button_widget.dart';
+import 'package:share_plus/share_plus.dart';
 
 class ResultPage extends StatelessWidget {
   final String title;
@@ -62,7 +63,9 @@ class ResultPage extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 68),
                 width: double.maxFinite,
                 child: NextButtonWidget.purple(
-                    label: "Compartilhar", onTap: () {})),
+                    label: "Compartilhar", onTap: () {
+                      Share.share("Veja meu resultado no quiz $title: \n$result de $length");
+                    })),
             SizedBox(height: 20),
             Container(
                 padding: EdgeInsets.symmetric(horizontal: 68),
