@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 
 import 'package:devquiz/challenge/challenge_controller.dart';
-import 'package:devquiz/challenge/widgets/next_button/next_button_widget.dart';
 import 'package:devquiz/challenge/widgets/question_indicator/question_indicator.dart';
 import 'package:devquiz/challenge/widgets/quiz/quiz_widget.dart';
+import 'package:devquiz/result/result_page.dart';
 import 'package:devquiz/shared/models/question_model.dart';
+import 'package:devquiz/shared/route_animations/route_animations.dart';
+import 'package:devquiz/shared/widgets/next_button/next_button_widget.dart';
 
 class ChallengePage extends StatefulWidget {
   final List<QuestionModel> questions;
+  final String title;
 
   ChallengePage({
     Key? key,
     required this.questions,
+    required this.title,
   }) : super(key: key);
 
   @override
@@ -26,14 +30,23 @@ class _ChallengePageState extends State<ChallengePage> {
   void initState() {
     pageController.addListener(() {
       controller.currentPage = pageController.page!.toInt() + 1;
+      print(controller.currentPageNotifier);
     });
     super.initState();
+    
   }
 
   void nextPage() {
     if (controller.currentPage < widget.questions.length)
       pageController.nextPage(
           duration: Duration(milliseconds: 300), curve: Curves.decelerate);
+  }
+
+  void onSelected(bool value) {
+    if (value) {
+      controller.contIsRight++;
+    }
+    nextPage();
   }
 
   @override
@@ -64,7 +77,7 @@ class _ChallengePageState extends State<ChallengePage> {
           controller: pageController,
           children: widget.questions
               .map((question) =>
-                  QuizWidget(question: question, onChange: nextPage))
+                  QuizWidget(question: question, onSelected: onSelected))
               .toList()),
       bottomNavigationBar: SafeArea(
         bottom: true,
@@ -86,7 +99,16 @@ class _ChallengePageState extends State<ChallengePage> {
                               child: NextButtonWidget.green(
                                   label: "Confirmar",
                                   onTap: () {
-                                    Navigator.pop(context);
+                                    Navigator.of(context).pushReplacement(
+                                        RouteAnimations(
+                                                route: ResultPage(
+                                                    title: widget.title,
+                                                    length:
+                                                        widget.questions.length,
+                                                    result:
+                                                        controller.contIsRight),
+                                                duration: 1000)
+                                            .slide());
                                   }))
                       ],
                     ))),
